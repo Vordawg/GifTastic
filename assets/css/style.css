@@ -1,0 +1,17 @@
+body {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+
+  }
+
+button, #add-animal {
+    color: white;
+    background-color: #5D989B;
+    margin-right: 20px;
+    border-radius: 12px;
+    display: inline-block;
+  }
