@@ -1,41 +1,41 @@
-var animals = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish",
-    "bird", "ferret", "turtle", "sugar glider", "chincilla", "hedgehog",
-    "hermit crab", "gerbil", "pygmy goat", "chicken", "capybata",
-    "teacup pig", "serval", "salamander", "frog"];
+var wrestlers = ["the undertaker", "hulk hogan", "john cena", "the rock", "steve austin", "triple h",
+    "shawn michaels", "bret hart", "ric flair", "randy savage", "randy orton", "andre the giant",
+    "bill goldgerg", "the ultimate warrior", "trish stratus", "becky lynch", "sasha banks",
+    "alexa bliss", "beth phoenix", "charlotte flair", "edge"];
 
 function setButtons() {
     $("#buttons").empty();
 
-    for (var loop = 0; loop < animals.length; loop++) {
+    for (var loop = 0; loop < wrestlers.length; loop++) {
 
         var $button = $('<button style="margin-right: 5px">');
 
-        $button.addClass("animal");
-        $button.attr("data-name", animals[loop]);
-        $button.text(animals[loop]);
+        $button.addClass("wrestler");
+        $button.attr("data-name", wrestlers[loop]);
+        $button.text(wrestlers[loop]);
 
         $("#buttons").append($button);
     }
 }
 
-$("#add-animal").on("click", function (event) {
+$("#add-wrestler").on("click", function (event) {
     event.preventDefault();
 
-    var newAnimal = $("#animal-input").val().trim();
-    newAnimal = newAnimal.toLowerCase();
+    var newwrestler = $("#wrestler-input").val().trim();
+    newwrestler = newwrestler.toLowerCase();
 
-    if (newAnimal.length > 0 && animals.lastIndexOf(newAnimal) == -1) {
-        animals.push(newAnimal);
+    if (newwrestler.length > 0 && wrestlers.lastIndexOf(newwrestler) == -1) {
+        wrestlers.push(newwrestler);
         setButtons();
-        $("#animal-input").val("");
+        $("#wrestler-input").val("");
     }
 });
 
-function displayAnimalInfo() {
+function displaywrestlerInfo() {
 
-    var animal = $(this).attr("data-name");
-    animal = encodeURIComponent(animal);
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=8Q14oFQ6SQyNme8uLSBwLWGSKhxyvUIB&limit=10";
+    var wrestler = $(this).attr("data-name");
+    wrestler = encodeURIComponent(wrestler);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + wrestler + "&api_key=8Q14oFQ6SQyNme8uLSBwLWGSKhxyvUIB&limit=10";
 
     $.ajax({
         url: queryURL,
@@ -51,6 +51,7 @@ function displayAnimalInfo() {
             for (var loop = 0; loop < results.length; loop++) {
 
                 var rating = results[loop].rating;
+                rating = rating.toUpperCase();
                 var imageAnimateName = results[loop].images.fixed_height.url;
                 var imageStillName = results[loop].images.fixed_height_still.url;
 
@@ -58,15 +59,15 @@ function displayAnimalInfo() {
 
                 var $p = $('<p style="padding-top: 40px">').text("Rating: " + rating);
 
-                var $animalImage = $("<img>");
-                $animalImage.addClass("gif");
-                $animalImage.attr("data-state", "still");
-                $animalImage.attr("src", imageStillName);
-                $animalImage.attr("data-still", imageStillName);
-                $animalImage.attr("data-animate", imageAnimateName);
+                var $wrestlerImage = $("<img>");
+                $wrestlerImage.addClass("gif");
+                $wrestlerImage.attr("data-state", "still");
+                $wrestlerImage.attr("src", imageStillName);
+                $wrestlerImage.attr("data-still", imageStillName);
+                $wrestlerImage.attr("data-animate", imageAnimateName);
 
                 $gifSpan.append($p);
-                $gifSpan.append($animalImage);
+                $gifSpan.append($wrestlerImage);
 
                 $gifRow.append($gifSpan);
             }
@@ -89,7 +90,7 @@ function setImageStatus() {
     }
 }
 
-$(document).on("click", ".animal", displayAnimalInfo);
+$(document).on("click", ".wrestler", displaywrestlerInfo);
 
 $(document).on("click", ".gif", setImageStatus);
 

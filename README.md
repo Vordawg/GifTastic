@@ -1,2 +1,1 @@
-# GifTastic
-GIPHY API
+This project uses the GIPHY API to make a dynamic web page that populates with gifs of wrestlers.  All animated gifs will be displayed still and animation will begin upon the user clicking the gif.
