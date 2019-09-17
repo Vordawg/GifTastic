@@ -22,18 +22,20 @@ $("#add-animal").on("click", function (event) {
     event.preventDefault();
 
     var newAnimal = $("#animal-input").val().trim();
+    newAnimal = newAnimal.toLowerCase();
 
     if (newAnimal.length > 0 && animals.lastIndexOf(newAnimal) == -1) {
         animals.push(newAnimal);
         setButtons();
+        $("#animal-input").val("");
     }
 });
 
 function displayAnimalInfo() {
 
     var animal = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        animal + "&api_key=8Q14oFQ6SQyNme8uLSBwLWGSKhxyvUIB&limit=10";
+    animal = encodeURIComponent(animal);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=8Q14oFQ6SQyNme8uLSBwLWGSKhxyvUIB&limit=10";
 
     $.ajax({
         url: queryURL,
